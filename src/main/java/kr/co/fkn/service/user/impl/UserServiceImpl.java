@@ -1,9 +1,15 @@
 package kr.co.fkn.service.user.impl;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
+import kr.co.fkn.common.Search;
 import kr.co.fkn.service.domain.User;
 import kr.co.fkn.service.user.UserDao;
 import kr.co.fkn.service.user.UserService;;
@@ -26,50 +32,22 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public User getUser(String userId) throws Exception {
+	public Map<String, Object> getUserList(Search search) {
 		// TODO Auto-generated method stub
-		return userDao.getUser(userId);
+		
+		Map<String,Object> map = new HashMap<String, Object>();
+		
+		List<User> userList = new ArrayList<User>();
+		
+		userList = userDao.getUserList(search);
+		int totalCount = userDao.getTotalCount(search);
+		
+		map.put("userList", userList);
+		map.put("totalCount", new Integer(totalCount));
+		
+		return map;
 	}
+	
+	
 
-	@Override
-	public void createUser(User user) {
-		// TODO Auto-generated method stub
-		try {
-			userDao.createUser(user);
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
 	}
-
-	@Override
-	public String idCheck(String userId) throws Exception {
-		// TODO Auto-generated method stub
-		return userDao.idCheck(userId);
-	}
-
-	@Override
-	public String nickCheck(String nickname) throws Exception {
-		// TODO Auto-generated method stub
-		return userDao.nickCheck(nickname);
-	}
-
-	@Override
-	public User getSuperUser(Integer userNo) throws Exception {
-		// TODO Auto-generated method stub
-		return userDao.getSuperUser(userNo);
-	}
-
-	@Override
-	public void updateUser(User userVO) throws Exception {
-		// TODO Auto-generated method stub
-		userDao.updateUser(userVO);
-	}
-
-	@Override
-	public void deleteUser(Integer userNo) throws Exception {
-		// TODO Auto-generated method stub
-		userDao.deleteUser(userNo);
-	}
-
-}

@@ -13,11 +13,14 @@
 	<typeAliases>
 		<typeAlias alias="user" type="kr.co.fkn.service.domain.User" />
 		<typeAlias alias="log" type="kr.co.fkn.common.Log" />
+		<typeAlias alias="main" type="kr.co.fkn.service.domain.Main" />
+		<typeAlias alias="search" type="kr.co.fkn.common.Search" />
 	</typeAliases>
 	
 	<mappers>
 		<mapper resource="sql/LogMapper.xml"/>
 		<mapper resource="sql/UserMapper.xml"/>
+		<mapper resource="sql/MainMapper.xml"/>
 	</mappers>
 
 </configuration>

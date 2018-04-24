@@ -17,6 +17,20 @@
 		<result property="role" column="role" jdbcType="VARCHAR" />
 	</resultMap>
 	
+	<select id="getUserList" parameterType="search" resultMap="userSelectMap">
+	
+	select * from user
+	
+	</select>
+	
+	<select id="totalCount" parameterType="search" resultType="int">
+	select count(*)
+	from (select * from user) countTable;
+	
+	</select>
+	
+	
+	
 	
 	
 </mapper>

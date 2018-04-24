@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE mapper
+		PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+		"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="MainMapper">
+
+	<resultMap id="mainSelectMap" type="main">
+		<result property="mainNo" column="main_no" jdbcType="NUMERIC" />
+		<result property="title" column="title" jdbcType="VARCHAR" />
+		<result property="contents" column="contents" jdbcType="VARCHAR" />
+		<result property="tablesInForKnowledgeNote" column="Tables_in_ForKnowledgeNote" jdbcType="VARCHAR" />
+	</resultMap>
+	
+	<select id="getMainList" parameterType="search" resultMap="mainSelectMap">
+		select * from tab;
+	</select>
+	
+		<select  id="getTotalCount"  parameterType="search"	 resultType="int">
+	  	SELECT COUNT(*)
+	  	FROM(	SELECT * FROM main) countTable						
+	 </select>
+	
+	
+	
+	
+</mapper>
