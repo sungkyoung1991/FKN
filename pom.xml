@@ -248,15 +248,29 @@
 
 
 
-			<plugin>
+			<!-- <plugin>
 				<groupId>org.apache.tomcat.maven</groupId>
 				<artifactId>tomcat7-maven-plugin</artifactId>
 				<version>2.2</version>
 				<configuration>
 					<path>/</path>
 					<url>http://121.172.19.45:1010/manager/text</url>
+					<url>http://localhost:8080/manager/text</url>
+					<username>sungkyoung1991</username>
+					<password>4577</password>
+					<update>true</update>
+				</configuration>
+			</plugin> -->
+			<plugin>
+				<groupId>org.apache.tomcat.maven</groupId>
+				<artifactId>tomcat7-maven-plugin</artifactId>
+				<version>2.2</version>
+				<configuration>
+					<path>/</path>
+					<!-- <url>http://210.221.220.71:3030/manager/text</url> -->
 					<!-- <url>http://localhost:8080/manager/text</url> -->
-					<username>kimsk</username>
+					<url>http://127.0.0.1:2020/manager/text</url>
+					<username>sungkyoung1991</username>
 					<password>4577</password>
 					<update>true</update>
 				</configuration>
