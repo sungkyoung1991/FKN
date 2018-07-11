@@ -36,29 +36,7 @@ var socket = io('http://127.0.0.1:3000');
 socket.on('connect',function(){
   console.log('서버와 연결jsp');
 });
-
-/*  socket.on('message',function(msg){
-	 
-   document.writeln(msg);
- 
-
-}); */
-
-
-/* $(function(){
-	 $( "#b1" ).on("click" , function() {
-		 
-		 console.log('click...');
-			
-			var socket = io('http://127.0.0.1:3000');
-			
-			socket.emit('chat message', $('#m').val());
-			$('#m').val('');
-		    return false;
-	});
-}); */
-	
-	
+  
 $(function () {
 	var socket = io('http://127.0.0.1:3000');
     $('form').submit(function(){
@@ -66,11 +44,26 @@ $(function () {
       $('#m').val('');
       return false;
     });
+    
+    socket.on('chat message', function(msg){
+      $('#messages').append($('<li>').text(msg));
+    });
+    
+    socket.on('disconnect',function(req,res){// ping timeout error check..
+    	
+    	console.log('req : ' ,req);
+    	console.log('res : ' ,res);
+    	
+    	$('#messages').append($('<li>').text('client 가 나감..'));
+    	
+    });
+    
   });
+  
+  
+  /* socket disconnect emit */
+  
 
-
-
-	
 </script>
 
 </head>
@@ -80,6 +73,7 @@ $(function () {
 <h1>Socket.IO Sample</h1>
 
  <body>
+ 
     <ul id="messages"></ul>
     <form action="">
       <input id="m" autocomplete="off" /><button>Send</button>
