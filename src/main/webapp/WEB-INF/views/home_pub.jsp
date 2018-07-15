@@ -9,7 +9,42 @@
   integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
   crossorigin="anonymous"></script>
   
+<script src="http://127.0.0.1:3000/socket.io/socket.io.js"></script>
+
 <script type="text/javascript">
+
+
+
+/* node socket server init */
+var socket = io('http://127.0.0.1:3000');
+
+
+socket.on('connect',function(){
+  console.log('서버와 연결jsp');
+});
+  
+$(function () {
+	var socket = io('http://127.0.0.1:3000');
+    $('form').submit(function(){
+      socket.emit('chat message', $('#m').val());
+      $('#m').val('');
+      return false;
+    });
+    
+    socket.on('chat message', function(msg){
+      $('#messages').append($('<li>').text(msg));
+      
+    });
+    
+    socket.on('disconnect',function(req,res){// ping timeout error check..
+    	
+    	$('#messages').append($('<li>').text('client 가 나감..'));
+    	
+    });
+    
+  });
+  
+  /* socket disconnect emit */
 
 </script>
 
@@ -90,15 +125,43 @@
    
 }
 
-
-
-
+/* 
+#chatB * { margin: 0; padding: 0; box-sizing: border-box; }
+      #chatB { font: 13px Helvetica, Arial; }
+      .chatName { background: #000; padding: 3px; position: fixed; bottom: 0; width: 100%; }
+      .chatName input { border: 0; padding: 10px; width: 90%; margin-right: .5%; }
+      .chatName button { width: 9%; background: rgb(130, 224, 255); border: none; padding: 10px; }
+      #messages { list-style-type: none; margin: 0; padding: 0; }
+      #messages li { padding: 5px 10px; }
+      #messages li:nth-child(odd) { background: #eee; }
+ */
 
 </style>
 
 </head>
 
-<body>
+ 
+    
+
+<body id="chatB">
+
+<div class= "section">
+
+	<div class= "left subject">
+		채팅.
+	</div>
+	
+	<div class="right info">
+		<ul id="messages"></ul>
+		    <form action="" class = "chatName">
+		      <input id="m" autocomplete="off" /><button>Send</button>
+		    </form>
+	</div>
+	
+</div>
+</body>
+
+<body id = "pub">	    
 
 	<div class="section">
 			<div class="left subject">
