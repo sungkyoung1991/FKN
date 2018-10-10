@@ -56,6 +56,15 @@ public class MainController {
 
 
 	}
+	
+	@RequestMapping(value = "home_namespace")
+	public String home_namespace() throws Exception {
+
+		return "home_namespace";
+
+
+	}
+
 
 
 }

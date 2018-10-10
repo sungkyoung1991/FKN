@@ -31,16 +31,16 @@ socket.on('connect',function(){
   
 $(function () {
 	/*  1.socket  */
-	var socket = io('http://127.0.0.1:3000');
+	 /* var socket = io('http://127.0.0.1:3000'); */
 	
 	/*  2.socket > namespace  */
-	/* var socket = io('http://127.0.0.1:3000/namespace'); */
+	 var socket = io('http://127.0.0.1:3000/namespace2'); 
 	
 	
 	
     $('form').submit(function(){
-      socket.emit('chat message', $('.chat').val(), $('.nick').text());
-      $('.chat').val('');
+      socket.emit('chat message', $('#m').val(), $('#name').val());
+      $('#m').val('');
       return false;
     });
     
@@ -55,7 +55,7 @@ $(function () {
     });
     
     socket.on('change name', function(name){
-  	  $('.nick').text(name);
+  	  $('#name').val(name);
     });
     
     
@@ -66,7 +66,7 @@ $(function () {
   $(document).ready(function(){
 	  
 	  
-	  $('.chat').focus();
+	  $('#m').focus();
 	  
   });
   
@@ -78,54 +78,37 @@ $(function () {
 <style>
 
 
- { margin: 0; padding: 0; box-sizing: border-box; }  
-       body { font: 13px Helvetica, Arial; } 
-       .chatName { background: #000; padding: 3px; position: fixed; bottom: 0; width: 100%; } 
-       form input { border: 0; padding: 10px; width: 90%; margin-right: .5%; }
+* { margin: 0; padding: 0; box-sizing: border-box; }
+      body { font: 13px Helvetica, Arial; }
+      form { background: #000; padding: 3px; position: fixed; bottom: 0; width: 100%; }
+      form input { border: 0; padding: 10px; width: 90%; margin-right: .5%; }
       form button { width: 9%; background: rgb(130, 224, 255); border: none; padding: 10px; }
-       #messages { list-style-type: none; margin: 0; padding: 0; }
+      #messages { list-style-type: none; margin: 0; padding: 0; }
       #messages li { padding: 5px 10px; }
       #messages li:nth-child(odd) { background: #eee; }
       
       ul {margin-bottom : 200px;}
-      
-      /* .ib{display:inline-block;}
-      
-      .l{float:left;}
-      .r{float:right;}
-      .c{float:center;}
-      
-      .nick {width:10%; outline:red solid 1px;}
-      .chat{width:80%; outline:blue solid 1px;}
-      button{width:10%; align:left;}
-      
-      body input button {margin:0px; padding:0px; border:0px;} */
-      
-      
-      
       </style>
 
 </head>
 
-
-
  
-    
+<h1>home_namepace</h1>    
 
-<body>
+<body id="chatB">
+
+
 
 <div class= "section">
 
-
+<input type ="text" readOnly = "readOnly" id = "name"/>
 		<ul id="messages"></ul>
-		    <form action="" class = "formChat">
-		    <div id = "nick" class="nick l" ></div>
-		    <!-- <div class="r chat"></div> -->
-		    <input class="chat r" autocomplete="off" />
-		    
-		    <button class="r" >Send</button>
+		    <form action="" class = "chatName">
+		      <input id="m" autocomplete="off" /><button>Send</button>
 		    </form>
 </div>
+
+
 </body>
 
 
